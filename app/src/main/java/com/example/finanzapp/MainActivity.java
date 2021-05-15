@@ -41,7 +41,17 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        DoSomething("test");
         return super.onOptionsItemSelected(item);
+    }
+    /**
+     * Gibt eine Nachricht auf der Console aus.
+     *
+     *
+     * @author
+     * @param str Text der auf der Console ausgegeben wird.
+     */
+    public void DoSomething(String str){
+        //TODO implement this method
     }
 }
