@@ -1,5 +1,6 @@
 package com.example.finanzapp;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,8 +17,15 @@ import androidx.fragment.app.FragmentManager;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    Button btn_revenue, btn_expense;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        btn_revenue = (Button) findViewById(R.id.btn_revenue);
+        btn_expense = (Button) findViewById(R.id.btn_expense);
+
 
     }
 
