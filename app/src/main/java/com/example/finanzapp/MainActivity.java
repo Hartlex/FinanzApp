@@ -48,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
         SelectFragment(item);
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Selects a Fragment based on a menuItem.
+     * Then calls ChangeFragment to actually change the fragment.
+     *
+     * @author Hartmann A.
+     * @param item The menu item used to select the Fragment
+     * */
     private void SelectFragment(MenuItem item){
         int id = item.getItemId();
         switch (id){
@@ -62,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
                 return;
         }
     }
+
+    /**
+     * Changes the Content of the R.id.fragmentContainer
+     *
+     * @author Hartmann.A
+     * @param fragment The new Fragment that will be displayed.
+     * */
     private void ChangeFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
