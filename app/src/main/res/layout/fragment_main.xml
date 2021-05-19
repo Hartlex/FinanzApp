@@ -20,7 +20,42 @@
             android:layout_marginTop="32dp"
             android:text="Main"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/courier_prime"/>
+
+        <Button
+            android:id="@+id/btn_revenue"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/btn_revenue_description"
+            android:textColor="@color/colorrevenue"
+            android:drawableTop="@drawable/ic_revenue"
+            android:background="@drawable/revenue_button"
+            android:fontFamily="@font/courier_prime_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.148"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_expense"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/btn_expense_description"
+            android:textColor="@color/colorexpense"
+            android:drawableTop="@drawable/ic_expense"
+            android:background="@drawable/expense_button"
+            android:fontFamily="@font/courier_prime_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.916"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

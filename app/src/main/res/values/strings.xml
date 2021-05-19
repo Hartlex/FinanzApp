@@ -2,15 +2,46 @@
     <string name="app_name">FinanzApp</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="action_transactions">Transactions</string>
     <string name="action_main">Main</string>
+
+    <string name="btn_revenue_description">Einnahme buchen</string>
+    <string name="btn_expense_description">Ausgabe buchen</string>
+    <string name="date_description">Datum</string>
+    <string name="amount_description">Betrag</string>
+    <string name="note_description">Notiz</string>
+    <string name="btn_confirm_description">Eintrag erstellen</string>
+
+
+
+       <string-array name="category">
+        <item>Arzt/Medikamente</item>
+        <item>Ausbildung/Studium</item>
+        <item>Haushalt</item>
+        <item>Haustiere</item>
+        <item>Hobby</item>
+        <item>Kindergeld</item>
+        <item>Kino/Film/TV</item>
+        <item>Kommunikation</item>
+        <item>Kredite/Leasingraten</item>
+        <item>Lohn/Gehalt</item>
+        <item>Rente</item>
+        <item>Restaurant</item>
+        <item>Sonstige Einnahmen</item>
+        <item>Sonstiges</item>
+        <item>Sparen</item>
+        <item>Taschengeld</item>
+        <item>Unterhalt</item>
+        <item>Urlaub</item>
+        <item>Versicherungen</item>
+        <item>Wohnen</item>
+
+
+    </string-array>
+
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
