@@ -62,7 +62,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        Button btn = view.findViewById(R.id.button);
+        Button btn = view.findViewById(R.id.btn_expense);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +72,7 @@ public class MainFragment extends Fragment {
 
         return view;
     }
+
     /**
      * Changes the Activity to AddEntryActivity via Intent
      *

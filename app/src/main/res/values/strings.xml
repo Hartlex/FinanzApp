@@ -12,6 +12,8 @@
     <string name="amount_description">Betrag</string>
     <string name="note_description">Notiz</string>
     <string name="btn_confirm_description">Eintrag erstellen</string>
+    <string name="expense">Ausgabe</string>
+    <string name="revenue">Einnahme</string>
 
 
 
