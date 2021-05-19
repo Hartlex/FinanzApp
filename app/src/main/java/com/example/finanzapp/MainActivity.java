@@ -1,5 +1,6 @@
 package com.example.finanzapp;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -25,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     Button btn_revenue, btn_expense;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +44,21 @@ public class MainActivity extends AppCompatActivity {
         btn_revenue = (Button) findViewById(R.id.btn_revenue);
         btn_expense = (Button) findViewById(R.id.btn_expense);
 
+        /**  btn_revenue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (MainActivity.this, AddEntryActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        btn_expense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent (MainActivity.this, AddEntryActivity.class);
+                startActivity(intent1);
+            }
+        });  */
 
     }
 
