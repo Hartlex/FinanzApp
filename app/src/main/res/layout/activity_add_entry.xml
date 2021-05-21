@@ -68,7 +68,10 @@
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:focusableInTouchMode="false"
+        android:clickable="true"
+        />
 
     <EditText
         android:id="@+id/note"

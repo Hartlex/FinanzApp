@@ -20,7 +20,7 @@ public class AddEntryActivity extends AppCompatActivity {
 
     private Spinner _category;
     private EditText _date;
-    private int day, month, year;
+    private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +54,32 @@ public class AddEntryActivity extends AppCompatActivity {
     private void InitDatePicker(){
         _date = findViewById(R.id.date);
 
-        final Calendar calender = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         _date.setOnClickListener(new View.OnClickListener() {
-
-            /**
-             * setting up the DatePickerDialog
-             *
-             * @author Di Seri.F
-             * */
-            @Override
+           @Override
             public void onClick(View view) {
-                year = calender.get(Calendar.YEAR);
-                month = calender.get(Calendar.MONTH);
-                day = calender.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AddEntryActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year , int month, int dayOfMonth) {
-
-                        _date.setText(dayOfMonth +  "." + (month+1) + "." + year);
-
-                    }
-                }, 2021, month, day);
-                datePickerDialog.show();
+                ShowDatePicker();
             }
         });
+    }
+
+    /**
+     * display the DatePickerDialog
+     *
+     * @author Di Seri.F
+     * */
+    private void ShowDatePicker(){
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddEntryActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year , int month, int dayOfMonth) {
+                _date.setText(dayOfMonth +  "." + (month+1) + "." + year);
+            }
+        }, 2021, month, day);
+
+        datePickerDialog.show();
     }
 }
