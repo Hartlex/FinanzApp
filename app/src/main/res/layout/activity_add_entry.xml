@@ -72,7 +72,6 @@
         app:layout_constraintTop_toBottomOf="@+id/category"
         android:focusableInTouchMode="false"
         android:clickable="true"
-        android:focusable="true"
         />
 
     <EditText

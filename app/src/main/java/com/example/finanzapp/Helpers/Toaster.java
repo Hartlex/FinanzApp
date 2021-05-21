@@ -3,6 +3,8 @@ package com.example.finanzapp.Helpers;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.finanzapp.R;
+
 public final class Toaster {
     private Toaster(){}
 

@@ -11,6 +11,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.finanzapp.Helpers.Logger;
+import com.example.finanzapp.Helpers.Toaster;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
@@ -28,6 +30,7 @@ public class AddEntryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_entry);
         Intent intent = getIntent();
         isExpense = intent.getBooleanExtra("isExpense",true);
+
 
         //Elemente initialisieren
         InitSpinner();
