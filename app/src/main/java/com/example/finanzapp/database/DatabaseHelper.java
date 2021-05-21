@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.finanzapp.Helpers.Logger;
+
 public class DatabaseHelper extends SQLiteOpenHelper
 {
     public DatabaseHelper(Context context){
