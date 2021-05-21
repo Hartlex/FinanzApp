@@ -9,4 +9,7 @@ public final class Toaster {
     public static void toast(String msg, Context ctx){
         Toast.makeText(ctx, msg , Toast.LENGTH_SHORT).show();
     }
+    public static void toastLong(String msg,Context ctx){
+        Toast.makeText(ctx, msg , Toast.LENGTH_LONG).show();
+    }
 }
