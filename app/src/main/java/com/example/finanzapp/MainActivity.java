@@ -41,25 +41,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_revenue = (Button) findViewById(R.id.btn_revenue);
-        btn_expense = (Button) findViewById(R.id.btn_expense);
-
-        /**  btn_revenue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (MainActivity.this, AddEntryActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        btn_expense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent (MainActivity.this, AddEntryActivity.class);
-                startActivity(intent1);
-            }
-        });  */
-
     }
 
     @Override
@@ -72,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         SelectFragment(item);
+        BottomNavigationView bottomNavView = findViewById(R.id.navigationView);
+        bottomNavView.setSelectedItemId(item.getItemId());
         return super.onOptionsItemSelected(item);
     }
 
