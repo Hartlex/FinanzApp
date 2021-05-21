@@ -3,34 +3,36 @@ package com.example.finanzapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddEntryActivity extends AppCompatActivity {
 
     private Spinner _category;
     private EditText _date;
     private Calendar calendar;
+    private boolean isExpense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
+        Intent intent = getIntent();
+        isExpense = intent.getBooleanExtra("isExpense",true);
 
         //Elemente initialisieren
         InitSpinner();
         InitDatePicker();
-
+        InitTabs();
     }
 
     /**
@@ -81,5 +83,43 @@ public class AddEntryActivity extends AppCompatActivity {
         }, 2021, month, day);
 
         datePickerDialog.show();
+    }
+
+    /**
+     * Sets the Tablayout expenseRevenueTab to Expense or Revenue
+     * based on isExpense variable from Intent
+     *
+     * @author Hartmann A.
+     * */
+    private void InitTabs(){
+        final TabLayout tabLayout = findViewById(R.id.expenseRevenueTab);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.parent.setBackgroundResource(GetColorIndex(tab));
+                isExpense = tab.getPosition() == 1 ? true : false;
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+        int tabIndex = isExpense ? 1: 0;
+        TabLayout.Tab tab = tabLayout.getTabAt(tabIndex);
+        tab.select();
+        tabLayout.setBackgroundResource(GetColorIndex(tab));
+    }
+
+    /**
+     * Returns the ColorIndex based on Tab
+     *
+     * @param tab The tab that determines which ColorIndex is returned.
+     * @author Hartmann A.
+     * */
+    private int GetColorIndex(TabLayout.Tab tab){
+        return tab.getPosition()==0 ? R.color.colorrevenue : R.color.colorexpense;
     }
 }
