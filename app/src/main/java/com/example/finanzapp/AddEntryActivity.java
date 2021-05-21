@@ -18,19 +18,40 @@ import java.util.Date;
 
 public class AddEntryActivity extends AppCompatActivity {
 
-    protected Spinner _category;
-    protected EditText _date;
-    protected int day, month, year;
+    private Spinner _category;
+    private EditText _date;
+    private int day, month, year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
+        //Elemente initialisieren
+        InitSpinner();
+        InitDatePicker();
 
+    }
 
-        //Elemente definieren
+    /**
+     * return a view of each object for the category
+     *
+     * @author Di Seri.F
+     * */
+    private void InitSpinner(){
         _category = findViewById(R.id.category);
+        Spinner spinner = _category;
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+    /**
+     * Initializes Date Picker
+     *
+     * @author Di Seri.F
+     * */
+    private void InitDatePicker(){
         _date = findViewById(R.id.date);
 
         final Calendar calender = Calendar.getInstance();
@@ -58,23 +79,5 @@ public class AddEntryActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
-
-
-        /**
-         * return a view of each object for the category
-         *
-         * @author Di Seri.F
-         * */
-        // Spinner erstellen und befüllen
-        Spinner spinner = _category;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-
     }
-
-
-    public void TestMethod(){}
 }

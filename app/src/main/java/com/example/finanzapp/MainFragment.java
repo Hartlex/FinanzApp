@@ -66,10 +66,16 @@ public class MainFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GotToEntryActivity();
+                GotToEntryActivity(true);
             }
         });
-
+        btn = view.findViewById(R.id.btn_revenue);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GotToEntryActivity(false);
+            }
+        });
         return view;
     }
 
@@ -78,8 +84,9 @@ public class MainFragment extends Fragment {
      *
      * @author Hartmann.A
      * */
-    public void GotToEntryActivity(){
+    public void GotToEntryActivity(boolean isExpense){
         Intent myIntent = new Intent(getContext(),AddEntryActivity.class);
+        myIntent.putExtra("isExpense",isExpense);
         startActivity(myIntent);
     }
 }
