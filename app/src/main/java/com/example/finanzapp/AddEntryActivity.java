@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -31,7 +32,7 @@ public class AddEntryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         isExpense = intent.getBooleanExtra("isExpense",true);
 
-
+      
         //Elemente initialisieren
         InitSpinner();
         InitDatePicker();

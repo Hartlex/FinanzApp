@@ -29,6 +29,8 @@
 
     </com.google.android.material.tabs.TabLayout>
 
+
+
     <EditText
         android:id="@+id/amount"
         android:layout_width="380dp"
@@ -72,6 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/category"
         android:focusableInTouchMode="false"
         android:clickable="true"
+        android:focusable="true"
         />
 
     <EditText

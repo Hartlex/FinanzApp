@@ -5,6 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorrevenue">#669900</color>
     <color name="colorexpense">#F06463</color>
+    <color name="coloricon" >#2E4B5F</color>
 
     <color name="white">#FFFFFF</color>
     <color name="yellow">#FFFF00</color>
