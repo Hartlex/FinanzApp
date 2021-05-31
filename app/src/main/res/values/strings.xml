@@ -41,6 +41,15 @@
 
 
     </string-array>
+    <string-array name="year">
+        <item>2021</item>
+    </string-array>
+    <string-array name="month">
+        <item>Mai</item>
+    </string-array>
+    <string-array name="days">
+        <item>01</item>
+    </string-array>
 
 
     <!-- TODO: Remove or change this placeholder text -->
