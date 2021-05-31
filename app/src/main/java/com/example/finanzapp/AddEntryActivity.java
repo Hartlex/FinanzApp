@@ -32,7 +32,7 @@ public class AddEntryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         isExpense = intent.getBooleanExtra("isExpense",true);
 
-      
+
         //Elemente initialisieren
         InitSpinner();
         InitDatePicker();
