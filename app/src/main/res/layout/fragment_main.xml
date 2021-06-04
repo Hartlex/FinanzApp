@@ -11,51 +11,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="32dp"
-            android:text="Main"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/courier_prime"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/btn_revenue"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="32dp"
-            android:text="@string/btn_revenue_description"
-            android:textColor="@color/colorrevenue"
-            android:drawableTop="@drawable/ic_revenue"
-            android:background="@drawable/revenue_button"
-            android:fontFamily="@font/courier_prime_bold"
+        </com.github.mikephil.charting.charts.PieChart>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.148"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/btn_expense"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="32dp"
-            android:text="@string/btn_expense_description"
-            android:textColor="@color/colorexpense"
-            android:drawableTop="@drawable/ic_expense"
-            android:background="@drawable/expense_button"
-            android:fontFamily="@font/courier_prime_bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.916"
-            app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/btn_expense"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                android:layout_marginBottom="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/expense_button"
+                android:drawableTop="@drawable/ic_expense"
+                android:fontFamily="@font/courier_prime_bold"
+                android:text="@string/btn_expense_description"
+                android:textColor="@color/colorexpense" />
+
+            <Button
+                android:id="@+id/btn_revenue"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginBottom="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/revenue_button"
+                android:drawableTop="@drawable/ic_revenue"
+                android:fontFamily="@font/courier_prime_bold"
+                android:text="@string/btn_revenue_description"
+                android:textColor="@color/colorrevenue" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
