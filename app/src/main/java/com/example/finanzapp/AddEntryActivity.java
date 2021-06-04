@@ -29,6 +29,7 @@ public class AddEntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         isExpense = intent.getBooleanExtra("isExpense",true);
 
