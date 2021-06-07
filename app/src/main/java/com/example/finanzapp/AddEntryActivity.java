@@ -17,6 +17,7 @@ import com.example.finanzapp.database.Database;
 import com.example.finanzapp.database.MoneyEntry;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -46,6 +47,16 @@ public class AddEntryActivity extends AppCompatActivity {
         InitDatePicker();
         InitTabs();
     }
+    /**
+     * method for the number format
+     *
+     * @author Di Seri.F
+     * */
+    private static String formatNumberCurrency(String number) {
+        DecimalFormat formatter = new DecimalFormat ("###,###,##0.00");
+        return formatter.format(Double.parseDouble((number)));
+    }
+
 
     /**
      * return a view of each object for the category
@@ -143,7 +154,8 @@ public class AddEntryActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OnConfirm(v);
+
+               OnConfirm(v);
             }
         });
     }
@@ -166,6 +178,7 @@ public class AddEntryActivity extends AppCompatActivity {
     }
     private Double GetAmount(){
         String amountText = _amount.getText().toString();
+       //_amount.setText( formatNumberCurrency(amountText) + "€ ");
         return TryParseAmount(amountText);
 
     }
@@ -175,7 +188,7 @@ public class AddEntryActivity extends AppCompatActivity {
             return Double.parseDouble(str);
         }
         catch(NumberFormatException e){
-            Toaster.toast("Bitte geben Sie eine Betrag ein!",getApplicationContext());
+            Toaster.toast("Bitte geben Sie einen Betrag ein!",getApplicationContext());
         }
         return 0.0;
     }
@@ -203,4 +216,8 @@ public class AddEntryActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
+
+
 }
