@@ -1,5 +1,7 @@
 package com.example.finanzapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.finanzapp.Helpers.Toaster;
 import com.example.finanzapp.database.Database;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import java.util.Arrays;
  */
 public class SettingsFragment extends Fragment {
 
-    Button AddCategory, RemoveCategory;
+    Button AddCategory, RemoveCategory,DeleteDatabase;
     EditText AddRemove;
     Spinner sp;
     // TODO: Retrieve the objects from the other spinner element
@@ -109,11 +112,41 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_settings, container, false);
+        DeleteDatabase = (Button) v.findViewById(R.id.btn_delete);
+        DeleteDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ResetDatabase();
+            }
+        });
+        return v;
     }
 
-    private void ResetDatabase(){
+        /**
+        * Reset the Database
+        *
+        * @author Di Seri.F
+        * */
+        private void ResetDatabase() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Haushaltsbuch");
+            builder.setMessage("Sind Sie sicher, dass Sie alle Datensätze löschen möchten?");
+            builder.setPositiveButton("Löschen", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    Toaster.toast("Alle Datensätze wurden gelöscht!", getContext());
+                    Database.ClearDatabase();
+                }
+            });
+            builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
 
-        Database.ClearDatabase();
-    }
+                }
+            });
+            builder.create();
+            builder.show();
+        }
 }

@@ -35,11 +35,11 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/courier_prime"
             android:text="settings"
-            tools:layout_editor_absoluteX="43dp"
-            tools:layout_editor_absoluteY="296dp" />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-16dp" />
 
         <Button
-            android:id="@+id/AddButton"
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -47,14 +47,14 @@
             android:layout_marginBottom="24dp"
             android:text="Kategorie einfügen"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/RemoveButton"
+            app:layout_constraintEnd_toStartOf="@+id/btn_remove"
             app:layout_constraintHorizontal_bias="0.225"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/AddDeleteSpinner"
             app:layout_constraintVertical_bias="0.104" />
 
         <Button
-            android:id="@+id/RemoveButton"
+            android:id="@+id/btn_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -76,7 +76,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddButton" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alle Datensätze löschen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
