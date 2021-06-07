@@ -5,24 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.finanzapp.Helpers.Logger;
 import com.example.finanzapp.Helpers.Toaster;
+import com.example.finanzapp.database.Database;
+import com.example.finanzapp.database.MoneyEntry;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddEntryActivity extends AppCompatActivity {
 
     private Spinner _category;
     private EditText _date;
     private Calendar calendar;
+    private EditText _amount;
+    private EditText _comment;
     private boolean isExpense;
 
     @Override
@@ -35,6 +39,9 @@ public class AddEntryActivity extends AppCompatActivity {
 
 
         //Elemente initialisieren
+        InitConfirmButton();
+        _amount = findViewById(R.id.amount);
+        _comment = findViewById(R.id.comment);
         InitSpinner();
         InitDatePicker();
         InitTabs();
@@ -62,6 +69,10 @@ public class AddEntryActivity extends AppCompatActivity {
         _date = findViewById(R.id.date);
 
         calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        _date.setText(day +  "." + (month+1) + "." + year);
         _date.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View view) {
@@ -79,7 +90,6 @@ public class AddEntryActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(AddEntryActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year , int month, int dayOfMonth) {
@@ -126,5 +136,71 @@ public class AddEntryActivity extends AppCompatActivity {
      * */
     private int GetColorIndex(TabLayout.Tab tab){
         return tab.getPosition()==0 ? R.color.colorrevenue : R.color.colorexpense;
+    }
+
+    private void InitConfirmButton(){
+        Button btn = findViewById(R.id.btn_confirm);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnConfirm(v);
+            }
+        });
+    }
+
+    private void OnConfirm(View v){
+        Double amount = GetAmount();
+        Date date = GetDate();
+        String category = GetCategory();
+        String comment = GetComment();
+        if(amount==0) return;
+        if(!CheckAllValues(amount,date,category)) return;
+
+        MoneyEntry entry = new MoneyEntry(date,amount,category,isExpense,comment);
+        if(!Database.AddEntry(entry)){
+            Toaster.toast("Database Error!", getApplicationContext());
+            return;
+        }
+        finish();
+
+    }
+    private Double GetAmount(){
+        String amountText = _amount.getText().toString();
+        return TryParseAmount(amountText);
+
+    }
+    private Double TryParseAmount(String str){
+        try
+        {
+            return Double.parseDouble(str);
+        }
+        catch(NumberFormatException e){
+            Toaster.toast("Bitte geben Sie eine Betrag ein!",getApplicationContext());
+        }
+        return 0.0;
+    }
+    private Date GetDate(){
+         return new Date(calendar.getTimeInMillis());
+    }
+    private String GetCategory(){
+        return _category.getSelectedItem().toString();
+    }
+    private String GetComment(){
+        return _comment.getText().toString();
+    }
+    private Boolean CheckAllValues(Double amount,Date date,String category){
+        if(amount==0) {
+            Toaster.toast("Betrag darf nicht 0 sein!",getApplicationContext());
+            return false;
+        }
+        if(date==null){
+            Toaster.toast("Ungültiges Datum!",getApplicationContext());
+            return false;
+        }
+        if(category==""){
+            Toaster.toast("Ungültige Kategorie!",getApplicationContext());
+            return false;
+        }
+        return true;
     }
 }

@@ -42,6 +42,7 @@ public class MoneyEntry {
     public double getAmount(){return amount;}
     public String getCategory(){return category;}
     public boolean isExpense(){return isExpense;}
+    public int GetIsExpenseAsInt(){return isExpense? 1:0;}
     public String getComment(){return comment;}
 
 }

@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.finanzapp.database.Database;
+import com.example.finanzapp.database.MoneyEntry;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -72,6 +74,13 @@ public class MainFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Typeface tf =  ResourcesCompat.getFont(getContext(), R.font.courier_prime);
+        chart.setData(generatePieData(tf));
     }
 
     @Override
@@ -134,12 +143,11 @@ public class MainFragment extends Fragment {
     }
     protected PieData generatePieData(Typeface tf) {
 
-        int count = 4;
 
         ArrayList<PieEntry> entries1 = new ArrayList<>();
-
-        for(int i = 0; i < count; i++) {
-            entries1.add(new PieEntry((float) ((Math.random() * 60) + 40), "Ausgabe " + (i+1)));
+        MoneyEntry[] entries =  Database.GetAllEntries();
+        for(int i = 0; i < entries.length; i++) {
+            entries1.add(new PieEntry((float) entries[i].getAmount(), entries[i].getCategory()));
         }
 
         PieDataSet ds1 = new PieDataSet(entries1, "Haushalt");
