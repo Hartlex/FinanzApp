@@ -13,7 +13,7 @@
 
         <EditText
             android:id="@+id/AddDeleteSpinner"
-            android:layout_width="380dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -35,16 +35,15 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/courier_prime"
             android:text="settings"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-16dp" />
+            tools:layout_editor_absoluteX="-41dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <Button
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/settings_buttons"
             android:text="Kategorie einfügen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_remove"
@@ -61,6 +60,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="24dp"
             android:text="Kategorie löschen"
+            android:background="@drawable/settings_buttons"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/AddDeleteSpinner"
@@ -68,7 +68,7 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -80,9 +80,10 @@
 
         <Button
             android:id="@+id/btn_delete"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Alle Datensätze löschen"
+            android:background="@drawable/settings_buttons"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
