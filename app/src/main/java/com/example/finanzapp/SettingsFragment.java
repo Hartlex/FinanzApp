@@ -13,8 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.example.finanzapp.Categories.CategoryManager;
+import com.example.finanzapp.Categories.CategoryType;
 import com.example.finanzapp.Helpers.Toaster;
 import com.example.finanzapp.database.Database;
 
@@ -75,36 +76,13 @@ public class SettingsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        /**
-        ArrayAdapter adapter  = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list);
 
-         * add and remove each object for the category
-         *
-         * @author Di Seri.F
+        ArrayList<String> expenseCatList = CategoryManager.GetCategoryNames(CategoryType.EXPENSE);
+        ArrayAdapter adapter  = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,expenseCatList);
 
 
-        AddCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String s = AddRemove.getText().toString();
-                list.add(s);
-                adapter.notifyDataSetChanged();
-                sp.setAdapter(adapter);
-                Toast.makeText(getApplicationContext(), "Kategorie wurde hinzugefügt", Toast.LENGTH_LONG.show());
-            }
-        });
 
-            RemoveCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String s = AddRemove.getText().toString();
-                    list.remove(s);
-                    adapter.notifyDataSetChanged();
-                    sp.setAdapter(adapter);
-                    Toast.makeText(getApplicationContext(), "Kategorie wurde entfernt", Toast.LENGTH_LONG.show());
-                }
-            });
-         * */
+
     }
 
 
@@ -115,10 +93,23 @@ public class SettingsFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
         DeleteDatabase = (Button) v.findViewById(R.id.btn_delete);
+        AddCategory = (Button) v.findViewById(R.id.btn_add_category);
+        RemoveCategory = (Button) v.findViewById(R.id.btn_remove_category);
         DeleteDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ResetDatabase();
+            }
+        });
+        AddCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        RemoveCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
             }
         });
         return v;

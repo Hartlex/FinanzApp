@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.finanzapp.Categories.Category;
 import com.example.finanzapp.database.Database;
+import com.example.finanzapp.database.EntryContainer;
 import com.example.finanzapp.database.MoneyEntry;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -27,6 +29,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -145,9 +148,11 @@ public class MainFragment extends Fragment {
 
 
         ArrayList<PieEntry> entries1 = new ArrayList<>();
-        MoneyEntry[] entries =  Database.GetAllEntries();
-        for(int i = 0; i < entries.length; i++) {
-            entries1.add(new PieEntry((float) entries[i].getAmount(), entries[i].getCategory()));
+        EntryContainer container =  Database.GetAllEntries();
+        Map<Category,Double> entries = container.GetValues();
+        for (Map.Entry<Category,Double> entry: entries.entrySet())
+        {
+            entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().GetName()));
         }
 
         PieDataSet ds1 = new PieDataSet(entries1, "Haushalt");

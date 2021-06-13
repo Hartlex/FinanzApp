@@ -20,8 +20,8 @@ public class CategoryManager {
     }
 
     private static void LoadCategories(){
-       // Datenbankanbindung fehlt
-
+       _expenseCategories = Database.GetCategories(CategoryType.EXPENSE);
+       _revenueCategories = Database.GetCategories(CategoryType.REVENUE);
     }
 
     public static Category GetCategory(int id){
