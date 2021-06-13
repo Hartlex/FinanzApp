@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import com.example.finanzapp.Categories.CategoryManager;
 import com.example.finanzapp.database.Database;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Database db = new Database(getApplicationContext());
-
+        Database.ClearDatabase();
+        CategoryManager.Initialize();
 
     }
 

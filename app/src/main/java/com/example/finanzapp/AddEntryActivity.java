@@ -12,12 +12,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.finanzapp.Categories.Category;
+import com.example.finanzapp.Categories.CategoryManager;
+import com.example.finanzapp.Categories.CategoryType;
 import com.example.finanzapp.Helpers.Toaster;
 import com.example.finanzapp.database.Database;
 import com.example.finanzapp.database.MoneyEntry;
 import com.google.android.material.tabs.TabLayout;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -66,7 +70,11 @@ public class AddEntryActivity extends AppCompatActivity {
     private void InitSpinner(){
         _category = findViewById(R.id.category);
         Spinner spinner = _category;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
+        CategoryType type = CategoryType.EXPENSE;
+        if(!isExpense)
+            type = CategoryType.REVENUE;
+        ArrayList<String> list = CategoryManager.GetCategoryNames(type);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
@@ -124,6 +132,7 @@ public class AddEntryActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.parent.setBackgroundResource(GetColorIndex(tab));
                 isExpense = tab.getPosition() == 1 ? true : false;
+                OnTabChange();
             }
 
             @Override
@@ -163,12 +172,12 @@ public class AddEntryActivity extends AppCompatActivity {
     private void OnConfirm(View v){
         Double amount = GetAmount();
         Date date = GetDate();
-        String category = GetCategory();
+        Category category = GetCategory();
         String comment = GetComment();
         if(amount==0) return;
         if(!CheckAllValues(amount,date,category)) return;
 
-        MoneyEntry entry = new MoneyEntry(date,amount,category,isExpense,comment);
+        MoneyEntry entry = new MoneyEntry(date,amount,category.GetId(),isExpense,comment);
         if(!Database.AddEntry(entry)){
             Toaster.toast("Database Error!", getApplicationContext());
             return;
@@ -195,13 +204,16 @@ public class AddEntryActivity extends AppCompatActivity {
     private Date GetDate(){
          return new Date(calendar.getTimeInMillis());
     }
-    private String GetCategory(){
-        return _category.getSelectedItem().toString();
+    private Category GetCategory()
+    {
+
+        String catName = _category.getSelectedItem().toString();
+        return CategoryManager.GetCategory(catName);
     }
     private String GetComment(){
         return _comment.getText().toString();
     }
-    private Boolean CheckAllValues(Double amount,Date date,String category){
+    private Boolean CheckAllValues(Double amount,Date date,Category category){
         if(amount==0) {
             Toaster.toast("Betrag darf nicht 0 sein!",getApplicationContext());
             return false;
@@ -210,13 +222,22 @@ public class AddEntryActivity extends AppCompatActivity {
             Toaster.toast("Ungültiges Datum!",getApplicationContext());
             return false;
         }
-        if(category==""){
+        if(category==null){
             Toaster.toast("Ungültige Kategorie!",getApplicationContext());
             return false;
         }
         return true;
     }
-
+    private void OnTabChange(){
+        Spinner spinner = _category;
+        CategoryType type = CategoryType.EXPENSE;
+        if(!isExpense)
+            type = CategoryType.REVENUE;
+        ArrayList<String> list = CategoryManager.GetCategoryNames(type);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
 
 
 
