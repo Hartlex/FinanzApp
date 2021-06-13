@@ -1,5 +1,6 @@
 package com.example.finanzapp.Categories;
 
+import android.provider.ContactsContract;
 import android.widget.ArrayAdapter;
 
 import com.example.finanzapp.Helpers.Toaster;
@@ -24,12 +25,6 @@ public class CategoryManager {
        _revenueCategories = Database.GetCategories(CategoryType.REVENUE);
     }
 
-    /**
-     * Retrieve the category by the id
-     *
-     * @author Di Seri.F
-     * */
-
     public static Category GetCategory(int id){
         if(_expenseCategories.containsKey(id))
             return _expenseCategories.get(id);
@@ -37,13 +32,6 @@ public class CategoryManager {
             return _revenueCategories.get(id);
         return null;
     }
-
-    /**
-     * Retrieve the category by the name
-     *
-     * @author Di Seri.F
-     * */
-
     public static Category GetCategory(String name){
         for (Category cat:_expenseCategories.values())
         {
@@ -55,36 +43,19 @@ public class CategoryManager {
         }
         return null;
     }
-
-    /**
-     * Add a new the category in the corresponding type
-     *
-     * @author Di Seri.F
-     * */
-
-    public static void AddCategory(Category category){
-        if(category.IsExpense())
-            _expenseCategories.put(category.GetId(),category);
+    public static void AddCategory(String name, CategoryType type){
+        Category cat = Database.CreateCategory(name,type);
+        if(type == CategoryType.EXPENSE)
+            _expenseCategories.put(cat.GetId(),cat);
         else
-            _revenueCategories.put(category.GetId(),category);
-        // Add Database
+            _revenueCategories.put(cat.GetId(),cat);
     }
-    public static void AddCategories(Category[] categories){
-        for (Category cat :categories) {AddCategory(cat);}
-    }
-
-    /**
-     * Remove an existing category in the corresponding type
-     *
-     * @author Di Seri.F
-     * */
-
     public static void RemoveCategory(Category category){
         if(category.IsExpense())
-            _expenseCategories.remove(category);
+            _expenseCategories.remove(category.GetId());
         else
-            _revenueCategories.remove(category);
-        // remove Database
+            _revenueCategories.remove(category.GetId());
+        Database.DeleteCategory(category);
     }
     public static ArrayList<String> GetCategoryNames(CategoryType type){
         if(type == CategoryType.EXPENSE)

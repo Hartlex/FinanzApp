@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.finanzapp.Categories.Category;
 import com.example.finanzapp.Categories.CategoryManager;
 import com.example.finanzapp.Categories.CategoryType;
 import com.example.finanzapp.Helpers.Toaster;
@@ -29,9 +30,9 @@ import java.util.Arrays;
  */
 public class SettingsFragment extends Fragment {
 
-    Button AddCategory, RemoveCategory,DeleteDatabase;
-    EditText AddRemove;
-    Spinner sp;
+    private Button DeleteDatabase,addExpenseCatBtn,addRevenueCatBtn,removeExpenseCatBtn,removeRevenueCatBtn;
+    private EditText newExpenseText,newRevenueText;
+    private Spinner expenseCatSpinner,revenueCatSpinner;
     // TODO: Retrieve the objects from the other spinner element
     ArrayList list=new ArrayList(Arrays.asList(  ));
 
@@ -77,12 +78,6 @@ public class SettingsFragment extends Fragment {
         }
 
 
-        ArrayList<String> expenseCatList = CategoryManager.GetCategoryNames(CategoryType.EXPENSE);
-        ArrayAdapter adapter  = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,expenseCatList);
-
-
-
-
     }
 
 
@@ -93,25 +88,51 @@ public class SettingsFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
         DeleteDatabase = (Button) v.findViewById(R.id.btn_delete);
-        AddCategory = (Button) v.findViewById(R.id.btn_add_category);
-        RemoveCategory = (Button) v.findViewById(R.id.btn_remove_category);
         DeleteDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ResetDatabase();
             }
         });
-        AddCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
 
-        RemoveCategory.setOnClickListener(new View.OnClickListener() {
+        newExpenseText = (EditText) v.findViewById(R.id.expenseEditText);
+        newRevenueText = (EditText) v.findViewById(R.id.revenueEditText);
+        addExpenseCatBtn =  (Button) v.findViewById(R.id.addExpenseCatBtn);
+        addExpenseCatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AddCategory(CategoryType.EXPENSE);
             }
         });
+        addRevenueCatBtn = (Button) v.findViewById(R.id.addRevenueCatBtn);
+        addRevenueCatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddCategory(CategoryType.REVENUE);
+            }
+        });
+        removeExpenseCatBtn = v.findViewById(R.id.removeExpenseCatBtn);
+        removeExpenseCatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RemoveCategory(CategoryType.EXPENSE);
+            }
+        });
+        removeRevenueCatBtn = v.findViewById(R.id.removeRevenueCatBtn);
+        removeRevenueCatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RemoveCategory(CategoryType.REVENUE);
+            }
+        });
+        expenseCatSpinner = (Spinner) v.findViewById(R.id.expenseCatSpinner);
+        revenueCatSpinner = (Spinner) v.findViewById(R.id.revenueCatSpinner);
+
+
+        LoadSpinnerData(CategoryType.EXPENSE);
+        LoadSpinnerData(CategoryType.REVENUE);
+
+
         return v;
     }
 
@@ -139,5 +160,70 @@ public class SettingsFragment extends Fragment {
             });
             builder.create();
             builder.show();
+        }
+        private void AddCategory(CategoryType type){
+            String catName = newExpenseText.getText().toString();
+            if(type == CategoryType.REVENUE)
+                catName =  newRevenueText.getText().toString();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Kategorie erstellen");
+            builder.setMessage("Sind Sie sicher, dass Sie die Kategorie "+catName+" erstellen wollen?");
+            builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    String catName = newExpenseText.getText().toString();
+                    if(type == CategoryType.REVENUE)
+                        catName =  newRevenueText.getText().toString();
+                    CategoryManager.AddCategory(catName,type);
+                    LoadSpinnerData(type);
+                    Toaster.toast("Kategorie hinzugefügt!", getContext());
+                }
+            });
+            builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+
+                }
+            });
+            builder.create();
+            builder.show();
+        }
+        private void RemoveCategory(CategoryType type){
+            String catName = expenseCatSpinner.getSelectedItem().toString();
+            if(type == CategoryType.REVENUE)
+                catName =  revenueCatSpinner.getSelectedItem().toString();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Kategorie löschen");
+            builder.setMessage("Sind Sie sicher, dass Sie die Kategorie "+catName+" löschen wollen?");
+            builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    String catName = expenseCatSpinner.getSelectedItem().toString();
+                    if(type == CategoryType.REVENUE)
+                        catName =  revenueCatSpinner.getSelectedItem().toString();
+                    Category cat = CategoryManager.GetCategory(catName);
+                    if(cat ==null) return;
+                    CategoryManager.RemoveCategory(cat);
+                    LoadSpinnerData(type);
+                    Toaster.toast("Kategorie gelöscht!", getContext());
+                }
+            });
+            builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+
+                }
+            });
+            builder.create();
+            builder.show();
+        }
+        private void LoadSpinnerData(CategoryType type){
+           Spinner spinner = expenseCatSpinner;
+           if(type==CategoryType.REVENUE)
+               spinner = revenueCatSpinner;
+            ArrayList<String> list = CategoryManager.GetCategoryNames(type);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,list);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
         }
 }
