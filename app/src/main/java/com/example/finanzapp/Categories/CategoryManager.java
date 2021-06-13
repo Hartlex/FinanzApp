@@ -1,5 +1,6 @@
 package com.example.finanzapp.Categories;
 
+import android.provider.ContactsContract;
 import android.widget.ArrayAdapter;
 
 import com.example.finanzapp.Helpers.Toaster;
@@ -42,22 +43,19 @@ public class CategoryManager {
         }
         return null;
     }
-    public static void AddCategory(Category category){
-        if(category.IsExpense())
-            _expenseCategories.put(category.GetId(),category);
+    public static void AddCategory(String name, CategoryType type){
+        Category cat = Database.CreateCategory(name,type);
+        if(type == CategoryType.EXPENSE)
+            _expenseCategories.put(cat.GetId(),cat);
         else
-            _revenueCategories.put(category.GetId(),category);
-        // Add Database
-    }
-    public static void AddCategories(Category[] categories){
-        for (Category cat :categories) {AddCategory(cat);}
+            _revenueCategories.put(cat.GetId(),cat);
     }
     public static void RemoveCategory(Category category){
         if(category.IsExpense())
-            _expenseCategories.remove(category);
+            _expenseCategories.remove(category.GetId());
         else
-            _revenueCategories.remove(category);
-        // remove Database
+            _revenueCategories.remove(category.GetId());
+        Database.DeleteCategory(category);
     }
     public static ArrayList<String> GetCategoryNames(CategoryType type){
         if(type == CategoryType.EXPENSE)

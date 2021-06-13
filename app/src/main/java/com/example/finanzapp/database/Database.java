@@ -125,6 +125,15 @@ public class Database {
         return new Category((int)id,name,type);
 
     }
+    public static void DeleteCategory(Category category){
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        String table = _helper.TABLE_EXPENSE_CAT;
+        if(!category.IsExpense())
+            table = _helper.TABLE_REVENUE_CAT;
+        db.delete(table,_helper.COLUMN_ID+"=?",new String[]{category.GetId()+""});
+        db.delete(_helper.TABLE_MONEY_ENTRIES,_helper.COLUMN_CATEGORY+"=?", new String[]{category.GetId()+""});
+
+    }
     private static void DeleteAll(String table){
         String clearDBQuery = "DELETE FROM "+table;
         SQLiteDatabase db = _helper.getWritableDatabase();
