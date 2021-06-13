@@ -28,7 +28,7 @@ import java.util.Arrays;
  */
 public class SettingsFragment extends Fragment {
 
-    Button AddCategory, RemoveCategory,DeleteDatabase;
+    Button AddCategory, RemoveCategory, DeleteDatabase;
     EditText AddRemove;
     Spinner sp;
     // TODO: Retrieve the objects from the other spinner element
@@ -75,36 +75,7 @@ public class SettingsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        /**
-        ArrayAdapter adapter  = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list);
 
-         * add and remove each object for the category
-         *
-         * @author Di Seri.F
-
-
-        AddCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String s = AddRemove.getText().toString();
-                list.add(s);
-                adapter.notifyDataSetChanged();
-                sp.setAdapter(adapter);
-                Toast.makeText(getApplicationContext(), "Kategorie wurde hinzugefügt", Toast.LENGTH_LONG.show());
-            }
-        });
-
-            RemoveCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String s = AddRemove.getText().toString();
-                    list.remove(s);
-                    adapter.notifyDataSetChanged();
-                    sp.setAdapter(adapter);
-                    Toast.makeText(getApplicationContext(), "Kategorie wurde entfernt", Toast.LENGTH_LONG.show());
-                }
-            });
-         * */
     }
 
 
@@ -121,6 +92,8 @@ public class SettingsFragment extends Fragment {
                 ResetDatabase();
             }
         });
+        RemoveCategory = (Button) v.findViewById(R.id.btn_remove);
+        AddCategory = (Button) v.findViewById(R.id.btn_add);
         return v;
     }
 
@@ -149,4 +122,38 @@ public class SettingsFragment extends Fragment {
             builder.create();
             builder.show();
         }
+
+    /**
+     ArrayAdapter adapter  = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,list);
+
+     * add and remove each object for the category
+     *
+     * @author Di Seri.F
+
+
+    AddCategory.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+    String s = AddRemove.getText().toString();
+    list.add(s);
+    adapter.notifyDataSetChanged();
+    sp.setAdapter(adapter);
+    Toast.makeText(getApplicationContext(), "Kategorie wurde hinzugefügt", Toast.LENGTH_LONG.show());
+    }
+    });
+
+    RemoveCategory.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+    String s = AddRemove.getText().toString();
+    list.remove(s);
+    adapter.notifyDataSetChanged();
+    sp.setAdapter(adapter);
+    Toast.makeText(getApplicationContext(), "Kategorie wurde entfernt", Toast.LENGTH_LONG.show());
+    }
+    });
+     * */
+
+
+
 }

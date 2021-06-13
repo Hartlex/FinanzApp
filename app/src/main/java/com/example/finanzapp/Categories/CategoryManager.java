@@ -24,6 +24,12 @@ public class CategoryManager {
 
     }
 
+    /**
+     * Retrieve the category by the id
+     *
+     * @author Di Seri.F
+     * */
+
     public static Category GetCategory(int id){
         if(_expenseCategories.containsKey(id))
             return _expenseCategories.get(id);
@@ -31,6 +37,13 @@ public class CategoryManager {
             return _revenueCategories.get(id);
         return null;
     }
+
+    /**
+     * Retrieve the category by the name
+     *
+     * @author Di Seri.F
+     * */
+
     public static Category GetCategory(String name){
         for (Category cat:_expenseCategories.values())
         {
@@ -42,6 +55,13 @@ public class CategoryManager {
         }
         return null;
     }
+
+    /**
+     * Add a new the category in the corresponding type
+     *
+     * @author Di Seri.F
+     * */
+
     public static void AddCategory(Category category){
         if(category.IsExpense())
             _expenseCategories.put(category.GetId(),category);
@@ -52,6 +72,13 @@ public class CategoryManager {
     public static void AddCategories(Category[] categories){
         for (Category cat :categories) {AddCategory(cat);}
     }
+
+    /**
+     * Remove an existing category in the corresponding type
+     *
+     * @author Di Seri.F
+     * */
+
     public static void RemoveCategory(Category category){
         if(category.IsExpense())
             _expenseCategories.remove(category);

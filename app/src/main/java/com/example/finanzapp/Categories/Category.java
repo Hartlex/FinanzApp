@@ -1,5 +1,11 @@
 package com.example.finanzapp.Categories;
 
+/**
+ * Define the parameter for the category
+ *
+ * @author Di Seri.F
+ * */
+
 public class Category {
     private int _id;
     private String _name;
