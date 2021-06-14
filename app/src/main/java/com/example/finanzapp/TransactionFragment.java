@@ -8,7 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.example.finanzapp.Categories.Category;
+import com.example.finanzapp.Categories.CategoryManager;
+import com.example.finanzapp.database.Database;
+import com.example.finanzapp.database.MoneyEntry;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +82,22 @@ public class TransactionFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(), R.array.days, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
+
+        LinearLayout content = view.findViewById(R.id.scrollContent);
+        MoneyEntry[] allEntries = Database.GetAllEntries();
+        for(int i=0;i<allEntries.length;i++){
+
+            MoneyEntry entry = allEntries[i];
+            Category cat = CategoryManager.GetCategory(entry.getCategoryId());
+            View entryView = inflater.inflate(R.layout.transaction_item,null);
+            entryView.setId(i);
+            TextView catText = entryView.findViewById(R.id.categoryText);
+            TextView amountText = entryView.findViewById(R.id.amountText);
+            catText.setText(cat.GetName());
+            amountText.setText(entry.getAmount()+"");
+            content.addView(entryView);
+        }
+
         return view;
     }
 }

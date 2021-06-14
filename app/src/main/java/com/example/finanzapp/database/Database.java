@@ -64,8 +64,10 @@ public class Database {
         int count = cur.getCount();
         return null;
     }
-    public static EntryContainer GetAllEntries(){
-
+    public static EntryContainer GetEntryContainer(){
+        return new EntryContainer(GetAllEntries());
+    }
+    public static MoneyEntry[] GetAllEntries(){
         SQLiteDatabase db = _helper.getReadableDatabase();
         final String cmd =
                 "SELECT  * FROM "+_helper.TABLE_MONEY_ENTRIES;
@@ -77,7 +79,7 @@ public class Database {
             cur.moveToNext();
             result[i]= CreateMoneyEntry(cur);
         }
-        return new EntryContainer(result);
+        return result;
     }
     public static void ClearDatabase() {
         DeleteAll(_helper.TABLE_MONEY_ENTRIES);

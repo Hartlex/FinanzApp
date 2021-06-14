@@ -19,10 +19,7 @@ import android.widget.Button;
 import com.example.finanzapp.Categories.Category;
 import com.example.finanzapp.database.Database;
 import com.example.finanzapp.database.EntryContainer;
-import com.example.finanzapp.database.MoneyEntry;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -148,7 +145,7 @@ public class MainFragment extends Fragment {
 
 
         ArrayList<PieEntry> entries1 = new ArrayList<>();
-        EntryContainer container =  Database.GetAllEntries();
+        EntryContainer container =  Database.GetEntryContainer();
         Map<Category,Double> entries = container.GetValues();
         for (Map.Entry<Category,Double> entry: entries.entrySet())
         {
