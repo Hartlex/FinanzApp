@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Database db = new Database(getApplicationContext());
-        //Database.ClearDatabase();
         CategoryManager.Initialize();
 
     }

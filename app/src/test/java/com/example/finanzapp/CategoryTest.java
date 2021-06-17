@@ -1,13 +1,13 @@
 package com.example.finanzapp;
 import com.example.finanzapp.Categories.Category;
-import com.example.finanzapp.Categories.CategoryManager;
 import com.example.finanzapp.Categories.CategoryType;
-import com.example.finanzapp.database.Database;
+
 
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 public class CategoryTest {
+
     @Before
     public void Init(){
 
@@ -16,8 +16,9 @@ public class CategoryTest {
     public void CreateCategory(){
         String newCatName1 = "NewCat";
         CategoryType type1 = CategoryType.EXPENSE;
-        int id1 = 100;
+        int id1 = 99;
         Category cat1 = new Category(id1,newCatName1,type1);
+
         assertNotEquals(cat1,null);
         assertEquals(cat1.GetName(),newCatName1);
         assertEquals(cat1.IsExpense(),true);
@@ -35,4 +36,5 @@ public class CategoryTest {
 
 
     }
+
 }
