@@ -161,7 +161,7 @@ public class SettingsFragment extends Fragment {
             builder.create();
             builder.show();
         }
-        private void AddCategory(CategoryType type){
+        public void AddCategory(CategoryType type){
             String catName = newExpenseText.getText().toString();
             if(type == CategoryType.REVENUE)
                 catName =  newRevenueText.getText().toString();
