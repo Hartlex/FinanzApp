@@ -150,6 +150,7 @@ public class SettingsFragment extends Fragment {
                 public void onClick(DialogInterface dialogInterface, int which) {
                     Toaster.toast("Alle Datensätze wurden gelöscht!", getContext());
                     Database.ClearDatabase();
+                    CategoryManager.Initialize();
                 }
             });
             builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {

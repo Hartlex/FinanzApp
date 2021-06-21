@@ -206,7 +206,6 @@ public class AddEntryActivity extends AppCompatActivity {
     }
     private Category GetCategory()
     {
-
         String catName = _category.getSelectedItem().toString();
         return CategoryManager.GetCategory(catName);
     }

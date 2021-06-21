@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
+import android.provider.ContactsContract;
 
 import com.example.finanzapp.Categories.Category;
 import com.example.finanzapp.Categories.CategoryType;
@@ -51,6 +52,11 @@ public class Database {
         }
 
     }
+    public static boolean RemoveEntry(MoneyEntry entry){
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        int count= db.delete(_helper.TABLE_MONEY_ENTRIES,_helper.COLUMN_DATE+"='"+entry.getDate().getTime()+"'",null);
+        return count>0;
+    }
     public static MoneyEntry[] GetEntries(Date from,Date to){
 
         SQLiteDatabase db = _helper.getWritableDatabase();
@@ -70,7 +76,8 @@ public class Database {
     public static MoneyEntry[] GetAllEntries(){
         SQLiteDatabase db = _helper.getReadableDatabase();
         final String cmd =
-                "SELECT  * FROM "+_helper.TABLE_MONEY_ENTRIES;
+                "SELECT  * FROM "+_helper.TABLE_MONEY_ENTRIES
+                +" WHERE "+_helper.COLUMN_ISEXPENSE+" =1";
         Cursor cur = db.rawQuery(cmd,null);
         int count = cur.getCount();
         MoneyEntry[] result = new MoneyEntry[count];
@@ -127,14 +134,14 @@ public class Database {
         return new Category((int)id,name,type);
 
     }
-    public static void DeleteCategory(Category category){
+    public static boolean DeleteCategory(Category category){
         SQLiteDatabase db = _helper.getWritableDatabase();
         String table = _helper.TABLE_EXPENSE_CAT;
         if(!category.IsExpense())
             table = _helper.TABLE_REVENUE_CAT;
-        db.delete(table,_helper.COLUMN_ID+"=?",new String[]{category.GetId()+""});
+        int count = db.delete(table,_helper.COLUMN_ID+"=?",new String[]{category.GetId()+""});
         db.delete(_helper.TABLE_MONEY_ENTRIES,_helper.COLUMN_CATEGORY+"=?", new String[]{category.GetId()+""});
-
+        return count>0;
     }
     private static void DeleteAll(String table){
         String clearDBQuery = "DELETE FROM "+table;
