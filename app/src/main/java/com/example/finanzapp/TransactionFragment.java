@@ -1,19 +1,25 @@
 package com.example.finanzapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.finanzapp.Categories.Category;
 import com.example.finanzapp.Categories.CategoryManager;
+import com.example.finanzapp.Helpers.Toaster;
 import com.example.finanzapp.database.Database;
 import com.example.finanzapp.database.MoneyEntry;
 
@@ -32,7 +38,6 @@ public class TransactionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     public TransactionFragment() {
         // Required empty public constructor
     }
@@ -93,6 +98,13 @@ public class TransactionFragment extends Fragment {
             entryView.setId(i);
             TextView catText = entryView.findViewById(R.id.categoryText);
             TextView amountText = entryView.findViewById(R.id.amountText);
+            Button editButton = entryView.findViewById(R.id.editButton);
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    OnEditClick(entry);
+                }
+            });
             catText.setText(cat.GetName());
             amountText.setText(entry.getAmount()+"");
             content.addView(entryView);
@@ -100,4 +112,33 @@ public class TransactionFragment extends Fragment {
 
         return view;
     }
+    private void OnEditClick(MoneyEntry entry){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Edit Entry");
+        builder.setMessage("Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?");
+        builder.setPositiveButton("Löschen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                Database.RemoveEntry(entry);
+                Toaster.toast("Eintrag wurde gelöscht!", getContext());
+                ReloadPage();
+            }
+        });
+        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+
+            }
+        });
+        builder.create();
+        builder.show();
+    }
+    private void ReloadPage(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        if (Build.VERSION.SDK_INT >= 26) {
+            ft.setReorderingAllowed(false);
+        }
+        ft.detach(this).attach(this).commit();
+    }
+
 }

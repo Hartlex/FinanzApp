@@ -74,7 +74,6 @@ public class DatabaseTest {
         success = Database.DeleteCategory(testCategory2);
 
     }
-
     @After
     public void Cleanup(){
         Database.ClearDatabase();
