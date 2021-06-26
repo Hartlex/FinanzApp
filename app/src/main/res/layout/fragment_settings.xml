@@ -35,7 +35,8 @@
                     android:id="@+id/expenseCatText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ausgabe-Kategorien" />
+                    android:text="Ausgabe-Kategorien"
+                    android:textColor="@color/colorexpense"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -91,7 +92,8 @@
                     android:id="@+id/revenueCatText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Einnahme-Kategorien" />
+                    android:text="Einnahme-Kategorien"
+                    android:textColor="@color/colorrevenue"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,7 +145,7 @@
             android:id="@+id/btn_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/settings_buttons"
+            android:background="@drawable/settings_button"
             android:text="Alle Datensätze löschen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
