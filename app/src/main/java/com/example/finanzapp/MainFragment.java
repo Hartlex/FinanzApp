@@ -114,12 +114,6 @@ public class MainFragment extends Fragment {
         chart.setHoleRadius(45f);
         chart.setTransparentCircleRadius(50f);
 
-        //Legend l = chart.getLegend();
-        //l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        //l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        //l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        //l.setDrawInside(false);
-
         chart.setData(generatePieData(tf));
 
         return view;

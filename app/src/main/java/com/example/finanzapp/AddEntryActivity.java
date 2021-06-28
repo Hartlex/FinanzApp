@@ -131,7 +131,7 @@ public class AddEntryActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.parent.setBackgroundResource(GetColorIndex(tab));
-                isExpense = tab.getPosition() == 1 ? true : false;
+                isExpense = tab.getPosition() == 0 ? true : false;
                 OnTabChange();
             }
 
@@ -142,7 +142,7 @@ public class AddEntryActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-        int tabIndex = isExpense ? 1: 0;
+        int tabIndex = isExpense ? 0: 1;
         TabLayout.Tab tab = tabLayout.getTabAt(tabIndex);
         tab.select();
         tabLayout.setBackgroundResource(GetColorIndex(tab));
@@ -155,7 +155,7 @@ public class AddEntryActivity extends AppCompatActivity {
      * @author Hartmann A.
      * */
     private int GetColorIndex(TabLayout.Tab tab){
-        return tab.getPosition()==0 ? R.color.colorrevenue : R.color.colorexpense;
+        return tab.getPosition()==0 ? R.color.colorexpense : R.color.colorrevenue;
     }
 
     private void InitConfirmButton(){
