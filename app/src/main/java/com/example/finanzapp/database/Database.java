@@ -76,8 +76,7 @@ public class Database {
     public static MoneyEntry[] GetAllEntries(){
         SQLiteDatabase db = _helper.getReadableDatabase();
         final String cmd =
-                "SELECT  * FROM "+_helper.TABLE_MONEY_ENTRIES
-                +" WHERE "+_helper.COLUMN_ISEXPENSE+" =1";
+                "SELECT  * FROM "+_helper.TABLE_MONEY_ENTRIES;
         Cursor cur = db.rawQuery(cmd,null);
         int count = cur.getCount();
         MoneyEntry[] result = new MoneyEntry[count];

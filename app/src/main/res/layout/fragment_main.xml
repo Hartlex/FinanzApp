@@ -11,22 +11,64 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pieChart"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </com.github.mikephil.charting.charts.PieChart>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart"
+                    android:layout_width="340dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="32dp">
+
+                </com.github.mikephil.charting.charts.PieChart>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart2"
+                    android:layout_width="340dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="32dp">
+
+                </com.github.mikephil.charting.charts.PieChart>
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart3"
+                    android:layout_width="340dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="32dp">
+
+                </com.github.mikephil.charting.charts.PieChart>
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <LinearLayout
             android:id="@+id/linearLayout"

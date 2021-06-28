@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.finanzapp.Categories.Category;
+import com.example.finanzapp.Categories.CategoryType;
+import com.example.finanzapp.Helpers.ChartType;
 import com.example.finanzapp.database.Database;
 import com.example.finanzapp.database.EntryContainer;
 import com.github.mikephil.charting.charts.PieChart;
@@ -44,6 +46,8 @@ public class MainFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private PieChart chart;
+    private PieChart chart2;
+    private PieChart chart3;
     public MainFragment() {
     }
 
@@ -80,7 +84,9 @@ public class MainFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Typeface tf =  ResourcesCompat.getFont(getContext(), R.font.courier_prime);
-        chart.setData(generatePieData(tf));
+        chart.setData(generatePieData(tf,ChartType.EXPENSE));
+        chart2.setData(generatePieData(tf,ChartType.REVENUE));
+        chart3.setData(generatePieData(tf,ChartType.EXP_REV_RATIO));
     }
 
     @Override
@@ -101,11 +107,21 @@ public class MainFragment extends Fragment {
                 GotToEntryActivity(false);
             }
         });
+
         chart = view.findViewById(R.id.pieChart);
+        chart2 = view.findViewById(R.id.pieChart2);
+        chart3 = view.findViewById(R.id.pieChart3);
+        CreateChart(chart,ChartType.EXPENSE);
+        CreateChart(chart2,ChartType.REVENUE);
+        CreateChart(chart3,ChartType.EXP_REV_RATIO);
+        return view;
+    }
+
+    private void CreateChart(PieChart chart,ChartType type){
         Typeface tf =  ResourcesCompat.getFont(getContext(), R.font.courier_prime);
 
         chart.setCenterTextTypeface(tf);
-        chart.setCenterText(generateCenterText());
+        chart.setCenterText(generateCenterText(type));
         chart.setCenterTextSize(10f);
         chart.setCenterTextTypeface(tf);
         chart.getLegend().setEnabled(false);
@@ -114,9 +130,7 @@ public class MainFragment extends Fragment {
         chart.setHoleRadius(45f);
         chart.setTransparentCircleRadius(50f);
 
-        chart.setData(generatePieData(tf));
-
-        return view;
+        chart.setData(generatePieData(tf,type));
     }
 
     /**
@@ -129,25 +143,58 @@ public class MainFragment extends Fragment {
         myIntent.putExtra("isExpense",isExpense);
         startActivity(myIntent);
     }
-    private SpannableString generateCenterText() {
-        SpannableString s = new SpannableString("Haushalt\n Mai 2021");
-        s.setSpan(new RelativeSizeSpan(2f), 0, 8, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 8, s.length(), 0);
+    private SpannableString generateCenterText(ChartType type) {
+        SpannableString s=null;
+        switch (type){
+            case EXPENSE:
+                s = new SpannableString("Ausgaben \n Juni 2021");
+                break;
+            case REVENUE:
+                s = new SpannableString("Einnhamen \n Juni 2021");
+                break;
+            case EXP_REV_RATIO:
+                s = new SpannableString("Verhältniss \n Juni 2021");
+                break;
+        }
+        s.setSpan(new RelativeSizeSpan(2f), 0, 11, 0);
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 11, s.length(), 0);
         return s;
     }
-    protected PieData generatePieData(Typeface tf) {
-
-
+    protected PieData generatePieData(Typeface tf, ChartType type) {
         ArrayList<PieEntry> entries1 = new ArrayList<>();
         EntryContainer container =  Database.GetEntryContainer();
-        Map<Category,Double> entries = container.GetValues();
-        for (Map.Entry<Category,Double> entry: entries.entrySet())
-        {
-            entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().GetName()));
+        PieDataSet ds1=null;
+        switch (type){
+            case EXPENSE:
+                Map<Category,Double> expEntries = container.GetExpenseValues();
+                for (Map.Entry<Category,Double> entry: expEntries.entrySet())
+                {
+                    entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().GetName()));
+                }
+                ds1 = new PieDataSet(entries1, "Ausgaben");
+                ds1.setColors(ColorTemplate.MATERIAL_COLORS);
+                break;
+            case REVENUE:
+                Map<Category,Double> revEntries = container.GetRevenueValues();
+                for (Map.Entry<Category,Double> entry: revEntries.entrySet())
+                {
+                    entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().GetName()));
+                }
+                ds1 = new PieDataSet(entries1, "Einnahmen");
+                ds1.setColors(ColorTemplate.COLORFUL_COLORS);
+                break;
+            case EXP_REV_RATIO:
+                Map<CategoryType,Double> ratioEntries = container.GetExpRevRatio();
+                for (Map.Entry<CategoryType,Double> entry: ratioEntries.entrySet())
+                {
+                    entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().toString()));
+                }
+                ds1 = new PieDataSet(entries1, "Verhältniss");
+                ds1.setColors(ColorTemplate.PASTEL_COLORS);
+                break;
         }
 
-        PieDataSet ds1 = new PieDataSet(entries1, "Haushalt");
-        ds1.setColors(ColorTemplate.MATERIAL_COLORS);
+
         ds1.setSliceSpace(2f);
         ds1.setValueTextColor(Color.WHITE);
         ds1.setValueTextSize(12f);
@@ -156,5 +203,7 @@ public class MainFragment extends Fragment {
         d.setValueTypeface(tf);
 
         return d;
+
+
     }
 }
