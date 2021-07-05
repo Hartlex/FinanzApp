@@ -6,12 +6,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 
 import com.example.finanzapp.Categories.Category;
@@ -127,6 +129,7 @@ public class SettingsFragment extends Fragment {
         });
         expenseCatSpinner = (Spinner) v.findViewById(R.id.expenseCatSpinner);
         revenueCatSpinner = (Spinner) v.findViewById(R.id.revenueCatSpinner);
+
 
 
         LoadSpinnerData(CategoryType.EXPENSE);

@@ -172,7 +172,7 @@ public class MainFragment extends Fragment {
                     entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().GetName()));
                 }
                 ds1 = new PieDataSet(entries1, "Ausgaben");
-                ds1.setColors(ColorTemplate.MATERIAL_COLORS);
+                ds1.setColors(ColorTemplate.COLORFUL_COLORS);
                 break;
             case REVENUE:
                 Map<Category,Double> revEntries = container.GetRevenueValues();
@@ -181,7 +181,7 @@ public class MainFragment extends Fragment {
                     entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().GetName()));
                 }
                 ds1 = new PieDataSet(entries1, "Einnahmen");
-                ds1.setColors(ColorTemplate.COLORFUL_COLORS);
+                ds1.setColors(ColorTemplate.MATERIAL_COLORS);
                 break;
             case EXP_REV_RATIO:
                 Map<CategoryType,Double> ratioEntries = container.GetExpRevRatio();

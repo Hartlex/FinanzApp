@@ -14,143 +14,161 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp">
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_margin="8dp"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/expenseCatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Ausgabe-Kategorien"
+                android:textColor="@color/colorexpense"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/expenseCatText"
+                <EditText
+                    android:id="@+id/expenseEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ausgabe-Kategorien"
-                    android:textColor="@color/colorexpense"/>
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Kategorie Name" />
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/addExpenseCatBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="2"
 
-                    <EditText
-                        android:id="@+id/expenseEditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                    <Button
-                        android:id="@+id/addExpenseCatBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="+" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/expenseCatSpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/removeExpenseCatBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="-" />
-
-                </LinearLayout>
-
+                    android:background="@color/colorrevenue"
+                    android:text="Hinzufügen" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/revenueCatText"
+                <Spinner
+                    android:id="@+id/expenseCatSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Einnahme-Kategorien"
-                    android:textColor="@color/colorrevenue"/>
+                    android:layout_margin="8dp"
+                    android:layout_weight="1" />
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/removeExpenseCatBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/revenueEditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                    <Button
-                        android:id="@+id/addRevenueCatBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="+" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/revenueCatSpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/removeRevenueCatBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="-" />
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="2"
+                    android:background="@color/colorexpense"
+                    android:text="Löschen" />
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_margin="8dp"
+                android:background="@color/colorPrimary" />
+
+
+            <TextView
+                android:id="@+id/revenueCatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Einnahme-Kategorien"
+                android:textColor="@color/colorrevenue"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/revenueEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Kategorie Name" />
+
+                <Button
+                    android:id="@+id/addRevenueCatBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="2"
+                    android:background="@color/colorrevenue"
+                    android:text="Hinzufügen" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/revenueCatSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/removeRevenueCatBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="2"
+
+                    android:background="@color/colorexpense"
+                    android:text="Löschen" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_margin="8dp"
+                android:background="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/red"
+                android:text="Alle Datensätze löschen" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/settings_button"
-            android:text="Alle Datensätze löschen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
