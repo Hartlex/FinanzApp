@@ -187,7 +187,10 @@ public class MainFragment extends Fragment {
                 Map<CategoryType,Double> ratioEntries = container.GetExpRevRatio();
                 for (Map.Entry<CategoryType,Double> entry: ratioEntries.entrySet())
                 {
-                    entries1.add(new PieEntry((float) entry.getValue().doubleValue(), entry.getKey().toString()));
+                    String name = "Ausgaben";
+                    if(entry.getKey().toString()=="REVENUE")
+                        name = "Einnahmen";
+                    entries1.add(new PieEntry((float) entry.getValue().doubleValue(), name));
                 }
                 ds1 = new PieDataSet(entries1, "Verhältniss");
                 ds1.setColors(ColorTemplate.PASTEL_COLORS);
