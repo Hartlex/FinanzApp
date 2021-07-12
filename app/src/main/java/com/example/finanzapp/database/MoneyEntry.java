@@ -4,6 +4,15 @@ import com.example.finanzapp.Categories.Category;
 
 import java.util.Date;
 
+/**
+ * A storage class that contains the following attributes:
+ * Date : date
+ * double : amount
+ * int : categoryId
+ * boolean : isExpense
+ * String : comment
+ * @author Alexander Hartmann
+ */
 public class MoneyEntry {
     private Date date;
     private double amount;

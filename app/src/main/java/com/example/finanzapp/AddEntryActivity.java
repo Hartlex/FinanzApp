@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * @author Alexander Hartmann, Di Seri F.
+ */
 public class AddEntryActivity extends AppCompatActivity {
 
     private Spinner _category;
@@ -169,6 +172,13 @@ public class AddEntryActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Checks if all values are correct, if yes:
+     * -creates MoneyEntry
+     * -stores it in the database
+     * -calls finish() on the current activity
+     * @param v unused
+     */
     private void OnConfirm(View v){
         Double amount = GetAmount();
         Date date = GetDate();
@@ -185,12 +195,23 @@ public class AddEntryActivity extends AppCompatActivity {
         finish();
 
     }
+
+    /**
+     *
+     * @return the amount in the _amount EditText as Double
+     */
     private Double GetAmount(){
         String amountText = _amount.getText().toString();
        //_amount.setText( formatNumberCurrency(amountText) + "€ ");
         return TryParseAmount(amountText);
 
     }
+
+    /**
+     * tries to parse the input to Double
+     * @param str the string that is supposed to be parsed to Double
+     * @return return the double value if the operation succeeded, if not throws an exception and returns 0
+     */
     private Double TryParseAmount(String str){
         try
         {
@@ -201,17 +222,40 @@ public class AddEntryActivity extends AppCompatActivity {
         }
         return 0.0;
     }
+
+    /**
+     *
+     * @return returns the Date specified in this.calendar
+     */
     private Date GetDate(){
          return new Date(calendar.getTimeInMillis());
     }
+
+    /**
+     *
+     * @return returns the Category specified in this._category Spinner
+     */
     private Category GetCategory()
     {
         String catName = _category.getSelectedItem().toString();
         return CategoryManager.GetCategory(catName);
     }
+
+    /**
+     *
+     * @return returns the string specified in this._comment EditText
+     */
     private String GetComment(){
         return _comment.getText().toString();
     }
+
+    /**
+     * Checks all values to be suitable for a new MoneyEntry
+     * @param amount
+     * @param date
+     * @param category
+     * @return
+     */
     private Boolean CheckAllValues(Double amount,Date date,Category category){
         if(amount==0) {
             Toaster.toast("Betrag darf nicht 0 sein!",getApplicationContext());
@@ -227,6 +271,11 @@ public class AddEntryActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    /**
+     * Changes the Type of MoneyEntry that should be created and the Categories that are displayed
+     * to either expense or revenue, based on the selected Tab
+     */
     private void OnTabChange(){
         Spinner spinner = _category;
         CategoryType type = CategoryType.EXPENSE;

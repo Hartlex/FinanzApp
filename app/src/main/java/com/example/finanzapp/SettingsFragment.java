@@ -165,7 +165,12 @@ public class SettingsFragment extends Fragment {
             builder.create();
             builder.show();
         }
-        public void AddCategory(CategoryType type){
+
+    /**
+     * creates and adds a Category
+     * @param type the type of category that should be created
+     */
+    public void AddCategory(CategoryType type){
             String catName = newExpenseText.getText().toString();
             if(type == CategoryType.REVENUE)
                 catName =  newRevenueText.getText().toString();
@@ -192,6 +197,11 @@ public class SettingsFragment extends Fragment {
             builder.create();
             builder.show();
         }
+
+    /**
+     * removes and deletes a Category
+     * @param type the type of category that should be deleted
+     */
         private void RemoveCategory(CategoryType type){
             String catName = expenseCatSpinner.getSelectedItem().toString();
             if(type == CategoryType.REVENUE)
@@ -221,7 +231,12 @@ public class SettingsFragment extends Fragment {
             builder.create();
             builder.show();
         }
-        private void LoadSpinnerData(CategoryType type){
+
+    /**
+     * Loads/Reloads the Spinner data after first load/content change
+     * @param type
+     */
+    private void LoadSpinnerData(CategoryType type){
            Spinner spinner = expenseCatSpinner;
            if(type==CategoryType.REVENUE)
                spinner = revenueCatSpinner;

@@ -27,6 +27,7 @@ import com.example.finanzapp.database.MoneyEntry;
  * A simple {@link Fragment} subclass.
  * Use the {@link TransactionFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * @author Alexander Hartmann
  */
 public class TransactionFragment extends Fragment {
 
@@ -112,6 +113,11 @@ public class TransactionFragment extends Fragment {
 
         return view;
     }
+
+    /**
+     * Displays a Message Box with options
+     * @param entry The Entry the Message Box should be based on
+     */
     private void OnEditClick(MoneyEntry entry){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Edit Entry");
@@ -133,6 +139,10 @@ public class TransactionFragment extends Fragment {
         builder.create();
         builder.show();
     }
+
+    /**
+     * Reloads the Fragment on first load or after content change
+     */
     private void ReloadPage(){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (Build.VERSION.SDK_INT >= 26) {

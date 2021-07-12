@@ -8,9 +8,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Helps to handle multiple instances of MoneyEntries to improve readability in other classes
+ * @author Alexander Hartmann
+ */
 public class EntryContainer {
     private Map<Category, ArrayList<MoneyEntry>> _entries = new HashMap<>();
 
+    /**
+     * Creates an instance of this class
+     * @param entries all of the MoneyEntries the container should contain
+     */
     public EntryContainer(MoneyEntry[] entries){
         for (MoneyEntry entry:entries)
         {
@@ -21,6 +29,11 @@ public class EntryContainer {
 
         }
     }
+
+    /**
+     * Gets the Money amount of each expense category
+     * @return a Map<Category,Double> where Double is the sum amount of all MoneyEntries in that category
+     */
     public Map<Category,Double> GetExpenseValues(){
         Map<Category,Double> result= new HashMap<>();
         for (Map.Entry<Category,ArrayList<MoneyEntry>> pair:_entries.entrySet())
@@ -36,6 +49,10 @@ public class EntryContainer {
         }
         return result;
     }
+    /**
+     * Gets the Money amount of each revenue category
+     * @return a Map<Category,Double> where Double is the sum amount of all MoneyEntries in that category
+     */
     public Map<Category,Double> GetRevenueValues(){
         Map<Category,Double> result= new HashMap<>();
         for (Map.Entry<Category,ArrayList<MoneyEntry>> pair:_entries.entrySet())
@@ -50,6 +67,11 @@ public class EntryContainer {
         }
         return result;
     }
+
+    /**
+     * Gets the sum of all expenses and revenues
+     * @return a Mapy<CategoryType,Double> where Double is all the money in that category type
+     */
     public Map<CategoryType,Double> GetExpRevRatio(){
         Map<CategoryType,Double> result= new HashMap<>();
         double expense =0;
@@ -70,6 +92,11 @@ public class EntryContainer {
         result.put(CategoryType.REVENUE,revenue);
         return result;
     }
+
+    /**
+     * Deprecated DONT USE
+     * @return
+     */
     public Map<Category,Double> GetValues(){
         Map<Category,Double> result= new HashMap<>();
         for (Map.Entry<Category,ArrayList<MoneyEntry>> pair:_entries.entrySet())

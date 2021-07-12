@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Handles all Tasks for Category Management like adding and deleting Categories
+ *
+ * @author Di Seri.F
+ * */
 public class CategoryManager {
     private static Map<Integer,Category> _expenseCategories = new HashMap<>();
     private static Map<Integer,Category> _revenueCategories = new HashMap<>();

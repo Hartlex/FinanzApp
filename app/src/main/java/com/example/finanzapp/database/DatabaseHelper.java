@@ -9,6 +9,11 @@ import com.example.finanzapp.Helpers.Logger;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Some features of the Database.java class to make the Code there more readable
+ *
+ * @author Alexander Hartmann
+ */
 public class DatabaseHelper extends SQLiteOpenHelper
 {
     private static final String DB_NAME = "FinanceApp.db";
@@ -51,7 +56,10 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
 
-
+    /**
+     * creates a table for all MoneyEntries
+     * @param db the database the table should be created in
+     */
     private void CreateTable(SQLiteDatabase db){
         final String SQL_CREATE =
                 "CREATE TABLE " + TABLE_MONEY_ENTRIES +
@@ -63,6 +71,11 @@ public class DatabaseHelper extends SQLiteOpenHelper
                         COLUMN_COMMENT + " TEXT );";
         db.execSQL(SQL_CREATE);
     }
+
+    /**
+     * creates a table for all expense categories
+     * @param db the database the table should be created in
+     */
     private void CreateExpenseTable(SQLiteDatabase db){
         final String SQL_CREATE =
                 "CREATE TABLE "+ TABLE_EXPENSE_CAT+
@@ -70,6 +83,11 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 COLUMN_CATNAME +" TEXT NOT NULL);";
         db.execSQL(SQL_CREATE);
     }
+
+    /**
+     * creates a table for all revenue categories
+     * @param db the databse the table should be created in
+     */
     private void CreateRevenueTable(SQLiteDatabase db){
         final String SQL_CREATE =
                 "CREATE TABLE "+ TABLE_REVENUE_CAT+

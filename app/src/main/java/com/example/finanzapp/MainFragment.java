@@ -117,6 +117,11 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Builds the chart based on charttype
+     * @param chart the chartView that should be builded
+     * @param type the type of chart it should be
+     */
     private void CreateChart(PieChart chart,ChartType type){
         Typeface tf =  ResourcesCompat.getFont(getContext(), R.font.courier_prime);
 
@@ -143,6 +148,12 @@ public class MainFragment extends Fragment {
         myIntent.putExtra("isExpense",isExpense);
         startActivity(myIntent);
     }
+
+    /**
+     * generates the center text based on chartType
+     * @param type specifies the chartType
+     * @return a spinnable String with content based on chartType
+     */
     private SpannableString generateCenterText(ChartType type) {
         SpannableString s=null;
         switch (type){
@@ -160,6 +171,13 @@ public class MainFragment extends Fragment {
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 11, s.length(), 0);
         return s;
     }
+
+    /**
+     * generates the Data that is displayed in the chart based on chartType
+     * @param tf the Typeface needed for font
+     * @param type the tpye of Chart the data is generated for
+     * @return
+     */
     protected PieData generatePieData(Typeface tf, ChartType type) {
         ArrayList<PieEntry> entries1 = new ArrayList<>();
         EntryContainer container =  Database.GetEntryContainer();

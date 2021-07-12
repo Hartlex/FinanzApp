@@ -19,6 +19,10 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The common Database Facade to handle all Tasks for reading and writing to the SQLite Database
+ * @author Alexander Hartmann
+ */
 public class Database {
     private static DatabaseHelper _helper;
 
@@ -26,6 +30,11 @@ public class Database {
         _helper = new DatabaseHelper(context);
     }
 
+    /**
+     * Adds an entry to the database
+     * @param entry The Entry that should be added to the database
+     * @return returns true if the entry was successfully added to the database
+     */
     public static boolean AddEntry(MoneyEntry entry){
         SQLiteDatabase db = _helper.getWritableDatabase();
         final String cmd =
@@ -52,11 +61,24 @@ public class Database {
         }
 
     }
+
+    /**
+     * Removes an entry out of the database
+     * @param entry the entry that should be removed from the database
+     * @return returns true if the entry was successfully removed to the database
+     */
     public static boolean RemoveEntry(MoneyEntry entry){
         SQLiteDatabase db = _helper.getWritableDatabase();
         int count= db.delete(_helper.TABLE_MONEY_ENTRIES,_helper.COLUMN_DATE+"='"+entry.getDate().getTime()+"'",null);
         return count>0;
     }
+
+    /**
+     * gets all entries in a specific timespan
+     * @param from the date that is at the beginning of the timespan
+     * @param to the date that is ate the end of the timespan
+     * @return return all the entries in the specified timespan
+     */
     public static MoneyEntry[] GetEntries(Date from,Date to){
 
         SQLiteDatabase db = _helper.getWritableDatabase();
@@ -70,9 +92,19 @@ public class Database {
         int count = cur.getCount();
         return null;
     }
+
+    /**
+     * Gets all entries in the database in an instance of the EntryContainer class
+     * @return an instance of the EntryContainer class
+     */
     public static EntryContainer GetEntryContainer(){
         return new EntryContainer(GetAllEntries());
     }
+
+    /**
+     *
+     * @return returns all entries stored in the database
+     */
     public static MoneyEntry[] GetAllEntries(){
         SQLiteDatabase db = _helper.getReadableDatabase();
         final String cmd =
@@ -87,6 +119,12 @@ public class Database {
         }
         return result;
     }
+
+    /**
+     * clears the whole database
+     * also calls CreateDefaultExpenseCategories
+     * and CreateDefaultRevenueCategories
+     */
     public static void ClearDatabase() {
         DeleteAll(_helper.TABLE_MONEY_ENTRIES);
         DeleteAll(_helper.TABLE_EXPENSE_CAT);
@@ -95,6 +133,12 @@ public class Database {
         CreateDefaultRevenueCategories();
 
     }
+
+    /**
+     * Creates an instance of MoneyEntry based on the row where the cursor currently is
+     * @param cur the cursor that is reading the database
+     * @return returns a new MoneyEntry with data from the database
+     */
     private static MoneyEntry CreateMoneyEntry(Cursor cur){
         long date = cur.getLong(1);
         double amount = cur.getDouble(2);
@@ -104,6 +148,12 @@ public class Database {
 
         return new MoneyEntry(new Date(date),amount,categoryId,isExpense,comment);
     }
+
+    /**
+     * Gets all the Categories that are stored in the database
+     * @param type defines which type of categories should be returned
+     * @return returns a Map<Integer,Category> with all categories of the selected type
+     */
     public static Map<Integer,Category> GetCategories(CategoryType type){
         SQLiteDatabase db = _helper.getReadableDatabase();
         String table = _helper.TABLE_EXPENSE_CAT;
@@ -122,6 +172,13 @@ public class Database {
         }
         return result;
     }
+
+    /**
+     * Get a category stored in the database
+     * @param name The name the category has
+     * @param type  The type of the category
+     * @return return a Category base one name and type, if none is found returns null
+     */
     public static Category CreateCategory(String name, CategoryType type){
         SQLiteDatabase db = _helper.getWritableDatabase();
         String table = _helper.TABLE_EXPENSE_CAT;
@@ -133,6 +190,12 @@ public class Database {
         return new Category((int)id,name,type);
 
     }
+
+    /**
+     * Deletes a category from the database
+     * @param category specifies which category should be deleted
+     * @return return true if the caotegory was successfully deleted, false if not
+     */
     public static boolean DeleteCategory(Category category){
         SQLiteDatabase db = _helper.getWritableDatabase();
         String table = _helper.TABLE_EXPENSE_CAT;
@@ -142,11 +205,20 @@ public class Database {
         db.delete(_helper.TABLE_MONEY_ENTRIES,_helper.COLUMN_CATEGORY+"=?", new String[]{category.GetId()+""});
         return count>0;
     }
+
+    /**
+     * Deletes all data in a table
+     * @param table the table that all data should be deleted from
+     */
     private static void DeleteAll(String table){
         String clearDBQuery = "DELETE FROM "+table;
         SQLiteDatabase db = _helper.getWritableDatabase();
         db.execSQL(clearDBQuery);
     }
+
+    /**
+     * restores the default expense categories of the app
+     */
     private static void CreateDefaultExpenseCategories(){
         CreateCategory("Arzt/Medikamente", CategoryType.EXPENSE);
         CreateCategory("Ausbildung/Studium", CategoryType.EXPENSE);
@@ -163,6 +235,9 @@ public class Database {
         CreateCategory("Wohnen", CategoryType.EXPENSE);
 
     }
+    /**
+     * restores the default revenue categories of the app
+     */
     private static void CreateDefaultRevenueCategories(){
         CreateCategory("Kindergeld", CategoryType.REVENUE);
         CreateCategory("Lohn/Gehalt", CategoryType.REVENUE);
