@@ -17,7 +17,7 @@ import java.util.Date;
 public class DatabaseHelper extends SQLiteOpenHelper
 {
     private static final String DB_NAME = "FinanceApp.db";
-    private static final int DB_VERSION = 4;
+    private static final int DB_VERSION = 5;
 
     public static final String TABLE_MONEY_ENTRIES = "money_entries";
     public static final String TABLE_EXPENSE_CAT = "expense_categories";

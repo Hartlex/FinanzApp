@@ -148,6 +148,7 @@ public class AddEntryActivity extends AppCompatActivity {
         int tabIndex = isExpense ? 0: 1;
         TabLayout.Tab tab = tabLayout.getTabAt(tabIndex);
         tab.select();
+        OnTabChange();
         tabLayout.setBackgroundResource(GetColorIndex(tab));
     }
 

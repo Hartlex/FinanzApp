@@ -94,7 +94,7 @@ public class TransactionFragment extends Fragment {
         for(int i=0;i<allEntries.length;i++){
 
             MoneyEntry entry = allEntries[i];
-            Category cat = CategoryManager.GetCategory(entry.getCategoryId());
+            Category cat = CategoryManager.GetCategory(entry.getCategoryId(),entry.isExpense());
             View entryView = inflater.inflate(R.layout.transaction_item,null);
             entryView.setId(i);
             TextView catText = entryView.findViewById(R.id.categoryText);

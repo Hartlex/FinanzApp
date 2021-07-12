@@ -127,14 +127,18 @@ public class MainFragment extends Fragment {
 
         chart.setCenterTextTypeface(tf);
         chart.setCenterText(generateCenterText(type));
-        chart.setCenterTextSize(10f);
+        chart.setCenterTextSize(8f);
         chart.setCenterTextTypeface(tf);
         chart.getLegend().setEnabled(false);
         chart.getDescription().setText("");
         // radius of the center hole in percent of maximum radius
-        chart.setHoleRadius(45f);
-        chart.setTransparentCircleRadius(50f);
+        chart.setHoleRadius(50f);
+        chart.setTransparentCircleRadius(55f);
+        chart.setEntryLabelColor(Color.LTGRAY);
+        if(type==ChartType.REVENUE)
+            chart.setEntryLabelColor(Color.DKGRAY);
 
+        chart.setEntryLabelTextSize(12f);
         chart.setData(generatePieData(tf,type));
     }
 
@@ -217,7 +221,9 @@ public class MainFragment extends Fragment {
 
 
         ds1.setSliceSpace(2f);
-        ds1.setValueTextColor(Color.WHITE);
+        ds1.setValueTextColor(Color.LTGRAY);
+        if(type==ChartType.REVENUE)
+            ds1.setValueTextColor(Color.DKGRAY);
         ds1.setValueTextSize(12f);
 
         PieData d = new PieData(ds1);

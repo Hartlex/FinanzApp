@@ -28,6 +28,8 @@ public class Database {
 
     public Database(Context context){
         _helper = new DatabaseHelper(context);
+        if(GetCategories(CategoryType.EXPENSE).size()==0)
+            ClearDatabase();
     }
 
     /**

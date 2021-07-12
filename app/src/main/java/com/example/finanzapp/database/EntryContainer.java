@@ -22,7 +22,7 @@ public class EntryContainer {
     public EntryContainer(MoneyEntry[] entries){
         for (MoneyEntry entry:entries)
         {
-            Category cat = CategoryManager.GetCategory(entry.getCategoryId());
+            Category cat = CategoryManager.GetCategory(entry.getCategoryId(),entry.isExpense());
             if(!_entries.containsKey(cat))
                 _entries.put(cat,new ArrayList<MoneyEntry>());
             _entries.get(cat).add(entry);

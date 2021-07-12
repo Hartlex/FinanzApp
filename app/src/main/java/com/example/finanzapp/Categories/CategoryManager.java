@@ -29,21 +29,20 @@ public class CategoryManager {
        _revenueCategories = Database.GetCategories(CategoryType.REVENUE);
     }
 
-    public static Category GetCategory(int id){
-        if(_expenseCategories.containsKey(id))
+    public static Category GetCategory(int id, boolean isExpense){
+        if(isExpense)
             return _expenseCategories.get(id);
-        else if(_revenueCategories.containsKey(id))
+        else
             return _revenueCategories.get(id);
-        return null;
     }
     public static Category GetCategory(String name){
         for (Category cat:_expenseCategories.values())
         {
-            if(cat.GetName()==name) return cat;
+            if(cat.GetName()==name) {return cat;}
         }
         for (Category cat:_revenueCategories.values())
         {
-            if(cat.GetName()==name) return cat;
+            if(cat.GetName()==name) {return cat;}
         }
         return null;
     }
