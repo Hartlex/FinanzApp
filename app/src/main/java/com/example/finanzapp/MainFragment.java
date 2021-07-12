@@ -126,6 +126,7 @@ public class MainFragment extends Fragment {
         Typeface tf =  ResourcesCompat.getFont(getContext(), R.font.courier_prime);
 
         chart.setCenterTextTypeface(tf);
+
         chart.setCenterText(generateCenterText(type));
         chart.setCenterTextSize(8f);
         chart.setCenterTextTypeface(tf);
